@@ -1,0 +1,96 @@
+﻿
+using System;
+
+interface IPayment
+{
+    bool KiemTra(double soTien);
+    void ThanhToan(double soTien);
+}
+
+class ThanhToanTienMat : IPayment
+{
+    public bool KiemTra(double soTien)
+    {
+        return soTien > 0;
+    }
+
+    public void ThanhToan(double soTien)
+    {
+        Console.WriteLine("Thanh toan tien mat thanh cong!");
+        Console.WriteLine("So tien: " + soTien + " VND");
+    }
+}
+
+class ChuyenKhoan : IPayment
+{
+    public bool KiemTra(double soTien)
+    {
+        return soTien > 0;
+    }
+
+    public void ThanhToan(double soTien)
+    {
+        Console.WriteLine("Chuyen khoan thanh cong!");
+        Console.WriteLine("So tien: " + soTien + " VND");
+    }
+}
+
+class ViDienTu : IPayment
+{
+    public bool KiemTra(double soTien)
+    {
+        return soTien > 0;
+    }
+
+    public void ThanhToan(double soTien)
+    {
+        Console.WriteLine("Thanh toan vi dien tu thanh cong!");
+        Console.WriteLine("So tien: " + soTien + " VND");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("1. Tien mat");
+        Console.WriteLine("2. Chuyen khoan");
+        Console.WriteLine("3. Vi dien tu");
+        Console.Write("Chon phuong thuc: ");
+        int chon = int.Parse(Console.ReadLine());
+
+        Console.Write("Nhap so tien can thanh toan: ");
+        double tien = double.Parse(Console.ReadLine());
+
+        IPayment p;
+
+        switch (chon)
+        {
+            case 1:
+                p = new ThanhToanTienMat();
+                break;
+            case 2:
+                p = new ChuyenKhoan();
+                break;
+            case 3:
+                p = new ViDienTu();
+                break;
+            default:
+                Console.WriteLine("Phuong thuc khong hop le!");
+                return;
+        }
+
+        if (p.KiemTra(tien))
+        {
+            p.ThanhToan(tien);
+            Console.WriteLine("Da ghi nhan giao dich!");
+        }
+        else
+        {
+            Console.WriteLine("So tien khong hop le!");
+        }
+
+        Console.ReadKey();
+    }
+}
+
